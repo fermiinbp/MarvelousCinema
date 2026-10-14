@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <title>Ficha · Marvelous Cinema</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/detalle.css">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+</head>
+<body>
+
+    <header class="header">
+        <nav class="nav" aria-label="Navegación principal">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-rojo">Marvelous</span> <span class="logo-blanco">Cinema</span>
+            </a>
+            <a href="index.html" class="nav-volver" id="volver">← Volver</a>
+        </nav>
+    </header>
+
+    <main id="contenido">
+        <p class="estado" id="estado" role="status" aria-live="polite"></p>
+
+        <!-- Toda la ficha está oculta hasta que lleguen los datos -->
+        <article class="ficha" id="ficha" hidden>
+
+            <header class="ficha-hero" id="ficha-hero">
+                <div class="ficha-hero-contenido">
+                    <img class="ficha-poster" id="ficha-poster" src="" alt="">
+                    <div class="ficha-datos">
+                        <p class="ficha-tipo" id="ficha-tipo"></p>
+                        <h1 class="ficha-titulo" id="ficha-titulo"></h1>
+                        <p class="ficha-lema" id="ficha-lema"></p>
+                        <p class="ficha-meta" id="ficha-meta"></p>
+                        <ul class="ficha-generos" id="ficha-generos"></ul>
+
+                        <div class="ficha-puntuacion">
+                            <span class="ficha-nota" id="ficha-nota"></span>
+                            <span class="ficha-votos" id="ficha-votos"></span>
+                        </div>
+                        <div class="ficha-barra" aria-hidden="true">
+                            <span class="ficha-barra-relleno" id="ficha-barra"></span>
+                        </div>
+
+                        <button class="ficha-favorito" id="ficha-favorito" type="button" aria-pressed="false">
+                            ♥ Añadir a favoritos
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="seccion ficha-bloque">
+                <h2 class="seccion-titulo">Sinopsis</h2>
+                <p class="ficha-sinopsis" id="ficha-sinopsis"></p>
+            </section>
+
+            <section class="seccion ficha-bloque">
+                <h2 class="seccion-titulo">Ficha técnica</h2>
+                <dl class="ficha-tecnica" id="ficha-tecnica"></dl>
+            </section>
+
+            <section class="seccion ficha-bloque" id="bloque-trailer">
+                <h2 class="seccion-titulo">Tráiler</h2>
+                <div id="ficha-trailer"></div>
+            </section>
+
+            <section class="seccion ficha-bloque">
+                <h2 class="seccion-titulo">Reparto</h2>
+                <ul class="ficha-reparto" id="ficha-reparto"></ul>
+            </section>
+
+            <section class="seccion ficha-bloque" id="bloque-mapa">
+                <h2 class="seccion-titulo">Países de producción</h2>
+                <div class="ficha-mapa" id="mapa"></div>
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-copy">©2026 Fermín Barba Pérez. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="js/detalle.js" type="module"></script>
+</body>
+</html>
