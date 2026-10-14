@@ -321,9 +321,12 @@ function activarTarjeta(tarjeta) {
 
 
 // HERO 
-function elegirHero(porId, candidatas) {
-    const destacadas = candidatas.filter(p => TITULOS_HERO.test(p.titulo));
-    const unicas = new Map([...destacadas, ...porId].map(p => [p.id, p]));
+function elegirHero(candidatas) {
+    const unicas = new Map(
+        candidatas
+            .filter(p => TITULOS_HERO.test(p.titulo))
+            .map(p => [p.id, p])
+    );
     return [...unicas.values()];
 }
 
