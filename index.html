@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Marvelous Cinema: todas las películas y series de Marvel, novedades, próximos estrenos y recomendadas.">
+    <meta name="color-scheme" content="dark light">
+    <title>Marvelous Cinema</title>
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Estilos propios -->
+    <link rel="stylesheet" href="style/style.css">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+</head>
+<body>
+
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+    <!-- Intro  -->
+    <div class="intro" id="intro">
+        <p class="intro-logo" id="intro-logo" aria-label="Marvelous Cinema"></p>
+        <button class="intro-saltar" id="intro-saltar" type="button">Saltar</button>
+    </div>
+
+    <header class="header">
+        <nav class="nav" aria-label="Navegación principal">
+            <a href="#inicio" class="nav-logo">
+                <span class="logo-rojo">Marvelous</span> <span class="logo-blanco">Cinema</span>
+            </a>
+
+            <!-- Buscador -->
+            <form class="nav-buscador" id="buscador" role="search">
+                <svg class="nav-buscador-icono" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input type="search" id="buscador-input" class="nav-buscador-input"
+                       placeholder="Buscar en Marvel..." aria-label="Buscar película o serie"
+                       autocomplete="off" list="historial-datos">
+                <datalist id="historial-datos"></datalist>
+            </form>
+
+            <button class="nav-toggle" id="nav-toggle" type="button"
+                    aria-expanded="false" aria-controls="nav-lista" aria-label="Abrir menú">☰</button>
+
+            <ul class="nav-lista" id="nav-lista">
+                <li><a href="#novedades" class="nav-enlace">Novedades</a></li>
+                <li><a href="#recomendadas" class="nav-enlace">Recomendadas</a></li>
+                <li><a href="#maraton" class="nav-enlace">Maratón</a></li>
+                <li><a href="#peliculas" class="nav-enlace">Películas</a></li>
+                <li><a href="#series" class="nav-enlace">Series</a></li>
+                <li><a href="#favoritos" class="nav-enlace">Favoritos</a></li>
+                <li class="nav-tema">
+                    <span class="nav-tema-texto">Modo claro</span>
+                    <label class="interruptor-tema" title="Cambiar entre modo oscuro y claro">
+                        <input type="checkbox" class="interruptor-tema-input" id="interruptor-tema"
+                               aria-label="Cambiar entre modo oscuro y claro">
+                        <span class="interruptor-tema-pista"></span>
+                    </label>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="contenido">
+
+        <!-- Inicio -->
+        <section class="hero" id="inicio" aria-label="Estrenos destacados">
+            <div class="carrusel" id="carrusel">
+                <div class="carrusel-pista" id="carrusel-pista"></div>
+
+                <button class="carrusel-boton carrusel-anterior" id="carrusel-anterior" type="button" aria-label="Anterior">‹</button>
+                <button class="carrusel-boton carrusel-siguiente" id="carrusel-siguiente" type="button" aria-label="Siguiente">›</button>
+                <div class="carrusel-puntos" id="carrusel-puntos"></div>
+            </div>
+
+            <div class="hero-contenido">
+                <p class="hero-etiqueta" id="hero-etiqueta">Próximo estreno</p>
+                <p class="hero-estreno" id="hero-estreno"></p>
+                <h1 class="hero-nombre">Marvelous Cinema</h1>
+            </div>
+        </section>
+
+        <!-- Mensaje de carga / error de la API -->
+        <p class="estado" id="estado" role="status" aria-live="polite"></p>
+
+        <!-- Resultados de búsqueda  -->
+        <section id="resultados" class="seccion resultados-panel" hidden>
+            <h2 class="seccion-titulo" id="resultados-titulo">Resultados</h2>
+            <div class="grid-tarjetas" id="grid-resultados"></div>
+            <p class="vacio" id="resultados-vacio" hidden>No hay resultados. Prueba con otro título.</p>
+        </section>
+
+        <!-- Panel  -->
+        <section id="catalogo" class="seccion resultados-panel" aria-labelledby="catalogo-titulo" hidden>
+            <div class="catalogo-cabecera">
+                <h2 class="seccion-titulo" id="catalogo-titulo"></h2>
+                <button class="catalogo-cerrar" id="catalogo-cerrar" type="button">✕ Cerrar</button>
+            </div>
+            <div id="catalogo-filtros"></div>
+            <div class="grid-tarjetas" id="grid-catalogo"></div>
+            <p class="vacio" id="catalogo-vacio" hidden>Ninguna de las cargadas cumple los filtros. Sigue bajando o quita alguno.</p>
+            <button class="catalogo-mas" id="catalogo-mas" type="button">Cargar más</button>
+        </section>
+
+        <!-- Filas tipo carrusel -->
+        <section id="novedades" class="seccion">
+            <h2 class="seccion-titulo">Novedades y próximos estrenos</h2>
+            <div class="fila-tarjetas" id="grid-novedades"></div>
+        </section>
+
+        <section id="recomendadas" class="seccion">
+            <h2 class="seccion-titulo">Recomendadas</h2>
+            <div class="fila-tarjetas" id="grid-recomendadas"></div>
+        </section>
+
+        <section id="maraton" class="seccion seccion-maraton">
+            <h2 class="seccion-titulo">Maratón hacia Doomsday</h2>
+            <div class="fila-tarjetas" id="grid-maraton"></div>
+        </section>
+
+        <section id="peliculas" class="seccion">
+            <h2 class="seccion-titulo">Películas</h2>
+            <div class="fila-tarjetas" id="grid-peliculas"></div>
+        </section>
+
+        <section id="series" class="seccion">
+            <h2 class="seccion-titulo">Series</h2>
+            <div class="fila-tarjetas" id="grid-series"></div>
+        </section>
+
+        <section id="favoritos" class="seccion">
+            <h2 class="seccion-titulo">Mis favoritos</h2>
+            <div class="fila-tarjetas" id="grid-favoritos"></div>
+            <p class="vacio" id="favoritos-vacio">Aún no tienes favoritos. Pulsa el corazón de una tarjeta para guardarla.</p>
+        </section>
+
+        <!-- Estadísticas del catálogo -->
+        <section id="estadisticas" class="seccion">
+            <h2 class="seccion-titulo">Marvel en datos</h2>
+            <div class="estadisticas-grid">
+                <figure class="grafica">
+                    <figcaption class="grafica-titulo">Géneros del catálogo</figcaption>
+                    <div class="grafica-lienzo">
+                        <canvas id="grafica-generos"></canvas>
+                    </div>
+                </figure>
+                <figure class="grafica">
+                    <figcaption class="grafica-titulo">Las 10 películas mejor valoradas</figcaption>
+                    <div class="grafica-lienzo">
+                        <canvas id="grafica-notas"></canvas>
+                    </div>
+                </figure>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-contenido">
+
+            <p class="footer-firma">
+                Página diseñada con un gran poder y una gran responsabilidad por
+                <a href="https://www.linkedin.com/in/ferm%C3%ADn-barba-p%C3%A9rez-815219395/" target="_blank" rel="noopener">Fermín</a>
+            </p>
+
+            <nav class="footer-legal" aria-label="Enlaces legales">
+                <ul class="footer-lista">
+                    <li><a class="footer-enlace" href="#">Política de privacidad</a></li>
+                    <li><a class="footer-enlace" href="#">Términos y condiciones</a></li>
+                </ul>
+            </nav>
+
+            <a href="#inicio" class="footer-enlace">Volver arriba ↑</a>
+        </div>
+
+        <p class="footer-copy">©2026 Fermín Barba Pérez. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Plantilla de tarjeta-->
+    <template id="plantilla-tarjeta">
+        <article class="tarjeta" tabindex="0">
+            <img class="tarjeta-poster" src="" alt="" loading="lazy">
+            <button class="tarjeta-fav" type="button" aria-pressed="false" aria-label="Añadir a favoritos">♥</button>
+            <div class="tarjeta-info">
+                <h3 class="tarjeta-titulo"></h3>
+                <p class="tarjeta-fecha"></p>
+                <span class="tarjeta-nota"></span>
+            </div>
+        </article>
+    </template>
+
+    <!-- Librerías y script principal -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/main.js" type="module"></script>
+</body>
+</html>
